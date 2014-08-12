@@ -49,7 +49,7 @@ angular.module('flash', [])
         return flash;
     }])
 
-    .directive('flashMessages', [function () {
+    .directive('flashMessages', ['$timeout', function ($timeout) {
         var directive = { restrict: 'EA', replace: true };
         directive.template =
             '<div id="flash-messages" class="alert alert-{{level_message}} text-center flash-message-container am-slide-top" ng-show="messages">' +
@@ -61,8 +61,12 @@ angular.module('flash', [])
 
         directive.controller = ['$scope', '$rootScope', function ($scope, $rootScope) {
             $rootScope.$on('flash:message', function (_, messages, done) {
-                $scope.messages = messages;
-                $scope.level_message = level_message
+                $scope.messages = [];
+
+                $timeout(function () {
+                    $scope.messages = messages;
+                    $scope.level_message = level_message;
+                });
 
                 done();
             });
@@ -121,7 +125,7 @@ angular.module('flash', [])
         return flashModal;
     }])
 
-    .directive('flashModal', [function () {
+    .directive('flashModal', ['$timeout', function ($timeout) {
         var directive = { restrict: 'EA', replace: true };
         directive.template =
             '<div id="flash-modal" class="alert alert-{{level_message}} text-center flash-message-container am-slide-top" ng-show="messagesModal">' +
@@ -133,8 +137,12 @@ angular.module('flash', [])
 
         directive.controller = ['$scope', '$rootScope', function ($scope, $rootScope) {
             $rootScope.$on('flash:modal', function (_, messagesModal, done) {
-                $scope.messagesModal = messagesModal;
-                $scope.level_message = level_message
+                $scope.messagesModal = [];
+
+                $timeout(function () {
+                    $scope.messagesModal = messagesModal;
+                    $scope.level_message = level_message;
+                });
 
                 done();
             });
