@@ -5,8 +5,5 @@
   "keywords"       : [ "angular", "js", "flash", "messages" ],
   "author"         : "Guilherme J. Tramontina <guilherme.tramontina@gmail.com>",
   "readmeFilename" : "README.md",
-  "dependencies"   : {
-    "angular"      : "PatternConsulting/bower-angular#unstable"
-  },
   "ignore"         : [ "**/.*", "node_modules", "test" ]
 }
