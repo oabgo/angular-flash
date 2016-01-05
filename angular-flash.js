@@ -8,13 +8,10 @@ angular.module('angularFlash', [])
         $rootScope.flashModal_hide = true;
 
         var cleanup = function () {
-            if ($('#divModal').attr('id') === undefined) {
-                $rootScope.flash.messages = [];
-                $rootScope.flash_hide = true;
-            } else {
-                $rootScope.flashModal.messages = [];
-                $rootScope.flashModal_hide = true;
-            }
+            $rootScope.flash.messages = [];
+            $rootScope.flash_hide = true;
+            $rootScope.flashModal.messages = [];
+            $rootScope.flashModal_hide = true;
         };
 
         var emit = function (obj) {
