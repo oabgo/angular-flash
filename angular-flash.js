@@ -4,17 +4,26 @@ angular.module('angularFlash', [])
 
         $rootScope.flash = {};
         $rootScope.flashModal = {};
+        $rootScope.flash_hide = true;
+        $rootScope.flashModal_hide = true;
 
         var cleanup = function () {
-            $rootScope.flash.messages = [];
-            $rootScope.flashModal.messages = [];
+            if ($('#divModal').attr('id') === undefined) {
+                $rootScope.flash.messages = [];
+                $rootScope.flash_hide = true;
+            } else {
+                $rootScope.flashModal.messages = [];
+                $rootScope.flashModal_hide = true;
+            }
         };
 
         var emit = function (obj) {
             if ($('#divModal').attr('id') === undefined) {
                 $rootScope.flash = obj;
+                $rootScope.flash_hide = false;
             } else {
                 $rootScope.flashModal = obj;
+                $rootScope.flashModal_hide = false;
             }
         };
 
@@ -28,14 +37,18 @@ angular.module('angularFlash', [])
         };
 
         var flash = function (messages, level) {
-            cleanup();
-
             // Eleva a página ao topo
-            $('html').animate({scrollTop: 0},'slow');
+            $('body').animate({scrollTop: 0}, 'slow');
+
+            if ($('#divModal').attr('id') === undefined) {
+                $rootScope.flash_hide = true;
+            } else {
+                $rootScope.flashModal_hide = true;
+            }
 
             $timeout(function () {
                 emit({
-                    type: { custom: true },
+                    type: {custom: true},
                     messages: angular.isArray(messages) ? messages : [messages],
                     level: level
                 });
@@ -43,5 +56,4 @@ angular.module('angularFlash', [])
         };
 
         return flash;
-    }])
-;
+    }]);
