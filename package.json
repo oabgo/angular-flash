@@ -7,7 +7,6 @@
     "url"              : "https://github.com/gtramontina/angular-flash.git"
   },
   "scripts"            : {
-    "postinstall"      : "bower install",
     "test"             : "make test"
   },
   "keywords"           : [ "angular", "js", "flash", "messages" ],
